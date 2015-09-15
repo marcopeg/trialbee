@@ -1,14 +1,8 @@
 
 import { REMOVE_TODO } from 'actions/todo-list';
 
-const defaultValue = {
-    items: [{
-        id: '32few',
-        value: 'milk'
-    },{
-        id: 'dewdew',
-        value: 'sugar'
-    }],
+export const defaultValue = {
+    items: [],
     newValue: ''
 };
 
