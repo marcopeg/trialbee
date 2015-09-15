@@ -1,10 +1,6 @@
 
-import game from './game-reducer';
-import options from './options-reducer';
-import newOption from './new-option-reducer';
+import { todosReducer } from './todos-reducer';
 
 export const reducers = {
-    game,
-    options,
-    newOption
+    todos: todosReducer
 };

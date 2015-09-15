@@ -32,7 +32,7 @@ const store = finalCreateStore(appReducer);
 
 // finally startup UI
 
-import AppView from './app-view';
+import { TodoList } from './todo-list';
 
 export default class App extends React.Component {
     render() {
@@ -40,7 +40,7 @@ export default class App extends React.Component {
         var debug;
         if (false) {
             debug = (
-                <DebugPanel left top right>
+                <DebugPanel  top bottom right>
                     <DevTools store={store} monitor={LogMonitor} />
                 </DebugPanel>
             );
@@ -49,7 +49,7 @@ export default class App extends React.Component {
         return (
             <div>
                 <Provider store={store}>
-                    <AppView />
+                    <TodoList />
                 </Provider>
                 {debug}
             </div>
