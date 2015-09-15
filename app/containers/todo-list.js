@@ -16,9 +16,9 @@ export class TodoList extends React.Component {
                     .map(transformPropsIntoComponent);
 
         return (
-            <div>
+            <div className="container">
                 i am a todo list
-                <ul>{items}</ul>     
+                <ul className="list-group">{items}</ul>     
             </div>
         );
     }
