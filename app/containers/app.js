@@ -9,9 +9,11 @@ import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 import SliderMonitor from 'redux-slider-monitor';
 import DiffMonitor from 'redux-devtools-diff-monitor';
 
-import { reducers } from 'reducers';
 
-import AppView from './app-view';
+
+// create store
+
+import { reducers } from 'reducers';
 
 const appReducer = combineReducers(reducers);
 
@@ -24,11 +26,19 @@ const finalCreateStore = compose(
 
 const store = finalCreateStore(appReducer);
 
+
+
+
+
+// finally startup UI
+
+import AppView from './app-view';
+
 export default class App extends React.Component {
     render() {
 
         var debug;
-        if (true) {
+        if (false) {
             debug = (
                 <DebugPanel left top right>
                     <DevTools store={store} monitor={LogMonitor} />
