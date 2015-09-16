@@ -2,10 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { TodoItem } from 'components/todo-item';
-import { removeTodo } from 'services/todo-list';
+import { TodoForm } from 'components/todo-form';
+
+import { removeTodo, addTodo, loadTodos } from 'services/todo-list';
+import { removeTodos } from 'actions/todo-list';
 
 @connect(filterState)
 export class TodoList extends React.Component {
+    componentWillMount() {
+      var { dispatch } = this.props;
+      dispatch(loadTodos());
+    };
+
     render() {
         console.log(this.props);
 
@@ -17,11 +25,15 @@ export class TodoList extends React.Component {
 
         return (
             <div className="container">
-                i am a todo list
-                <ul className="list-group">{items}</ul>     
+                <h3>{"Todo list"}</h3>
+                <ul className="list-group">{items}</ul>
+                <TodoForm
+                  onRemove={todos => dispatch(removeTodos(todos))}
+                  onAdd={value => dispatch(addTodo(value))}
+                />
             </div>
         );
-    }
+    };
 }
 
 export function filterState(state) {
@@ -29,12 +41,13 @@ export function filterState(state) {
 }
 
 export function transformItemsIntoProps(dispatch) {
-    return item => {
-        return {
-            ...item,
-            action: $=> dispatch(removeTodo(item.id))
-        };
-    };
+    // return item => {
+    //     return {
+    //         ...item,
+    //         onClick: $=> dispatch(removeTodo(item.id))
+    //     };
+    // };
+    return item => item;
 }
 
 export function transformPropsIntoComponent(item) {
