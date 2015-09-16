@@ -1,7 +1,7 @@
 
 import { REMOVE_TODO, REMOVE_TODOS, ADD_TODO, ADD_TODOS, SELECT_TODO, TOGGLE_TODO_SELECT } from 'actions/todo-list';
 
-const defaultValue = {
+export const defaultValue = {
     items: [],
     selectedItems: ['1', '2', '3']
 };
@@ -44,7 +44,7 @@ export function todosReducer(state = defaultValue, action) {
     }
 }
 
-function setSelectedItems(selectedIds, id, isSelected) {
+export function setSelectedItems(selectedIds, id, isSelected) {
   if (isSelected) {
     return [...selectedIds, id];
   } else {
