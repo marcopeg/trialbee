@@ -1,8 +1,9 @@
 
-import { REMOVE_TODO, REMOVE_TODOS, ADD_TODO, ADD_TODOS, SELECT_TODO } from 'actions/todo-list';
+import { REMOVE_TODO, REMOVE_TODOS, ADD_TODO, ADD_TODOS, SELECT_TODO, TOGGLE_TODO_SELECT } from 'actions/todo-list';
 
 const defaultValue = {
-    items: []
+    items: [],
+    selectedItems: ['1', '2', '3']
 };
 
 export function todosReducer(state = defaultValue, action) {
@@ -18,7 +19,6 @@ export function todosReducer(state = defaultValue, action) {
             items: state.items.concat([action.payload])
           };
         case ADD_TODOS:
-          console.log('payload', action.payload);
           return {
             ...state,
             items: state.items.concat(action.payload)
@@ -34,7 +34,22 @@ export function todosReducer(state = defaultValue, action) {
             ...state,
             items: []
           }
+        case TOGGLE_TODO_SELECT:
+          return {
+            ...state,
+            selectedItems: setSelectedItems(state.selectedItems, action.payload.id, action.payload.isSelected)
+          };
         default:
             return state;
     }
+}
+
+function setSelectedItems(selectedIds, id, isSelected) {
+  if (isSelected) {
+    return [...selectedIds, id];
+  } else {
+    var index = selectedIds.indexOf(id);
+    selectedIds.splice(0, index);
+    return selectedIds;
+  }
 }

@@ -5,7 +5,7 @@ import { TodoItem } from 'components/todo-item';
 import { TodoForm } from 'components/todo-form';
 
 import { removeTodo, addTodo, loadTodos } from 'services/todo-list';
-import { removeTodos } from 'actions/todo-list';
+import { removeTodos, toggleTodoSelect } from 'actions/todo-list';
 
 @connect(filterState)
 export class TodoList extends React.Component {
@@ -20,7 +20,7 @@ export class TodoList extends React.Component {
         var { dispatch } = this.props;
 
         var items = this.props.items
-                    .map(transformItemsIntoProps(dispatch))
+                    .map(transformItemsIntoProps(dispatch, this.props.selectedItems))
                     .map(transformPropsIntoComponent);
 
         return (
@@ -40,14 +40,15 @@ export function filterState(state) {
     return state.todos;
 }
 
-export function transformItemsIntoProps(dispatch) {
-    // return item => {
-    //     return {
-    //         ...item,
-    //         onClick: $=> dispatch(removeTodo(item.id))
-    //     };
-    // };
-    return item => item;
+export function transformItemsIntoProps(dispatch, selectedItems) {
+    return item => {
+        let isSelected = selectedItems.find(id => id == item.id) !== undefined;
+        return {
+            ...item,
+            isSelected: isSelected,
+            toggleItemSelection: (id, isSelected) => dispatch(toggleTodoSelect(id, isSelected))
+        };
+    };
 }
 
 export function transformPropsIntoComponent(item) {

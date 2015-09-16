@@ -3,6 +3,7 @@ export const REMOVE_TODO = 'removeTodo';
 export const REMOVE_TODOS = 'removeTodos';
 export const ADD_TODO = 'addTodo';
 export const ADD_TODOS = 'addTodos';
+export const TOGGLE_TODO_SELECT = 'toggleTodoSelect'
 
 export function removeTodo(id) {
     return {
@@ -35,5 +36,15 @@ export function addTodos(todos) {
     return {
         type: ADD_TODOS,
         payload: todos
+    };
+}
+
+export function toggleTodoSelect(id, isSelected) {
+    return {
+        type: TOGGLE_TODO_SELECT,
+        payload: {
+          id: id,
+          isSelected: isSelected
+        }
     };
 }

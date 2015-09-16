@@ -1,19 +1,20 @@
 import React from 'react';
 
 export class TodoItem extends React.Component {
-    state = {
-        isActive: false,
-        isSelected: false
-    };
-
     static propTypes = {
         value: React.PropTypes.string,
+        isSelected: React.PropTypes.bool,
         onClick: React.PropTypes.func
     };
 
     static defaultProps = {
         value: 'this is a todo item',
+        isSelected: false,
         onClick: () => {}
+    };
+
+    state = {
+        isActive: false
     };
 
     setActive = () => {
@@ -28,31 +29,15 @@ export class TodoItem extends React.Component {
         });
     };
 
-    setSelected = () => {
-        this.setState({
-            isSelected: true
-        });
-    };
-
-    setUnselected = () => {
-        this.setState({
-            isSelected: false
-        });
-    };
-
     onClick = () => {
-      if (this.state.isSelected) {
-        this.setUnselected();
-      } else {
-        this.setSelected();
-      }
+      this.props.toggleItemSelection(this.props.id, !this.props.isSelected);
     };
 
     render() {
 
         var classes = ['list-group-item'];
 
-        if (this.state.isActive || this.state.isSelected) {
+        if (this.state.isActive || this.props.isSelected) {
             classes.push('active');
         }
 
