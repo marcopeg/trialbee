@@ -2,22 +2,27 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { TodoItem } from 'components/todo-item';
-import { removeTodo } from 'services/todo-list';
+import { loadInitialsTodos, removeTodo } from 'services/todo-list';
 
 @connect(filterState)
 export class TodoList extends React.Component {
+    componentWillMount() {
+        this.props.dispatch(loadInitialsTodos());
+    }
     render() {
         console.log(this.props);
 
-        var { dispatch } = this.props;
+        var { dispatch, dataIsReady } = this.props;
 
         var items = this.props.items
                     .map(transformItemsIntoProps(dispatch))
                     .map(transformPropsIntoComponent);
 
+        var loadingMsg = dataIsReady ? null : 'loading data...';
+
         return (
             <div className="container">
-                i am a todo list
+                {loadingMsg}
                 <ul className="list-group">{items}</ul>     
             </div>
         );

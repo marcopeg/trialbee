@@ -38,7 +38,7 @@ export default class App extends React.Component {
     render() {
 
         var debug;
-        if (false) {
+        if (true) {
             debug = (
                 <DebugPanel  top bottom right>
                     <DevTools store={store} monitor={LogMonitor} />

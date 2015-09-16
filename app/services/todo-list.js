@@ -1,5 +1,15 @@
 
-import { removeTodo as __removeTodo } from 'actions/todo-list';
+import { removeTodo as __removeTodo, dataIsReady } from 'actions/todo-list';
+
+var JSON = {
+    todos: [{
+        id: 1,
+        value: 'milk'
+    },{
+        id: 2,
+        value: 'sugar'
+    }]
+}
 
 export function removeTodo(id) {
     return (dispatch, getState) => {
@@ -8,6 +18,17 @@ export function removeTodo(id) {
         } else {
             alert('I dont think so');
         }
+    };
+}
+
+export function loadInitialsTodos() {
+    return (dispatch, getState) => {
+        console.log("FOOO");
+
+        setTimeout($=> {
+            dispatch(dataIsReady(JSON.todos));
+        }, 1000);
+
     };
 }
 

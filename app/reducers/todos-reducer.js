@@ -1,9 +1,9 @@
 
-import { REMOVE_TODO } from 'actions/todo-list';
+import { REMOVE_TODO, DATA_IS_READY } from 'actions/todo-list';
 
 export const defaultValue = {
     items: [],
-    newValue: ''
+    dataIsReady: false
 };
 
 export function todosReducer(state = defaultValue, action) {
@@ -12,6 +12,12 @@ export function todosReducer(state = defaultValue, action) {
             return {
                 ...state,
                 items: state.items.filter(item => item.id !== action.payload.id)
+            };
+        case DATA_IS_READY:
+            return {
+                ...state,
+                dataIsReady: true,
+                items: [...state.items].concat(action.payload)
             };
         default:
             return state;
