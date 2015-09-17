@@ -8,10 +8,11 @@ export const initialState = {
 export function qsReducer(state = initialState, action){
   switch(action.type){
     case SET_ACTIVE_QS:
-      return { ...state,
-        activeQs: action.payload 
+      return {
+        ...state,
+        activeQs: action.payload
       }
-    default: 
+    default:
       return state;
   }
 }
