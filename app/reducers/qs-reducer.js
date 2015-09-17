@@ -1,7 +1,21 @@
 import { SET_ACTIVE_QS } from 'actions/qs-actions';
 
+const fakeQuestions = [{
+  type: 'string',
+  title: 'Your name?',
+  validator: 'notEmpty'
+},{
+  type: 'string',
+  title: 'Your age?',
+  validator: 'notEmpty'
+},{
+  type: 'string',
+  title: 'Your illness?',
+  validator: 'notEmpty'
+}];
+
 export const initialState = {
-  qs: [],
+  qs: fakeQuestions,
   activeQs: -1
 }
 
