@@ -15,7 +15,7 @@ export class Paper extends React.Component {
         var cnt;
         var props = {
             key: 'paper-child',
-            className: ['paper', this.props.className].join(' ')
+            className: ['paper', 'shadow-z-3', this.props.className].join(' ')
         };
 
         if (this.props.isVisible) {
@@ -23,8 +23,8 @@ export class Paper extends React.Component {
         };
 
         return (
-            <ReactCSSTransitionGroup 
-                transitionName="paper" 
+            <ReactCSSTransitionGroup
+                transitionName="paper"
                 transitionAppear={this.props.animateAppear}
                 transitionAppearTimeout={this.props.animationTimeout}
                 transitionEnterTimeout={this.props.animationTimeout}
