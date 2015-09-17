@@ -2,7 +2,7 @@ import { qsReducer, initialState } from 'reducers/qs-reducer';
 import { setActiveQs } from 'actions/qs-actions';
 
 var emptyAction = { type: null }
-describe.only('qd reducer', function() {
+describe('qd reducer', function() {
 
     it('should work', function() {
         var state = qsReducer(undefined, emptyAction);
