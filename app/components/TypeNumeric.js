@@ -16,7 +16,7 @@ export class TypeNumeric extends React.Component {
         return (
             <div>
                 <h3>{title}</h3>
-                <Input type="text" placeholder="type numeric" />
+                <Input type="number" placeholder="type numeric" />
             </div>
         );
     }
