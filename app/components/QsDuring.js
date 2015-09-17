@@ -1,6 +1,16 @@
 import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 
+import { TypeString } from 'components/TypeString';
+import { TypeNumeric } from 'components/TypeNumeric';
+import { TypeDate } from 'components/TypeDate';
+
+const mapTypes = {
+    string: TypeString,
+    numeric: TypeNumeric,
+    date: TypeDate
+};
+
 export class QsDuring extends React.Component {
 
     static propTypes = {
@@ -15,10 +25,15 @@ export class QsDuring extends React.Component {
     }
 
     render() {
-        var { title, onNext } = this.props;
+        var { type, title, onNext } = this.props;
+
+        var input = React.createElement(mapTypes[type], {
+            title: title
+        });
+
         return (
             <div>
-                <h3>{title}</h3>
+                {input}
                 <Button bsStyle="primary" onClick={onNext}>Next</Button>
             </div>
         );

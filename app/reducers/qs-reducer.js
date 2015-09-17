@@ -5,11 +5,11 @@ const fakeQuestions = [{
   title: 'Your name?',
   validator: 'notEmpty'
 },{
-  type: 'string',
+  type: 'numeric',
   title: 'Your age?',
   validator: 'notEmpty'
 },{
-  type: 'string',
+  type: 'date',
   title: 'Your illness?',
   validator: 'notEmpty'
 }];
