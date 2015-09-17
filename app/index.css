@@ -1,0 +1,43 @@
+
+.paper {
+    position: absolute;
+    top:0;
+    left:0;
+    border: 1px solid #eee;
+    padding: 10px;
+    box-shadow: 3px 3px 8px #ccc;
+    background: #fff;
+}
+
+.paper-appear {
+    opacity: 0.01;
+    transform: scale(0.5);
+}
+
+.paper-appear.paper-appear-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: all .3s ease-out;
+}
+
+.paper-enter {
+    opacity: 0.01;
+    transform: scale(0.5) translate(200%, 0);
+}
+
+.paper-enter.paper-enter-active {
+    opacity: 1;
+    transform: scale(1) translate(0, 0);
+    transition: all .3s ease-out;
+}
+
+.paper-leave {
+    opacity: 1;
+    transform: scale(1) translate(0, 0);
+}
+
+.paper-leave.paper-leave-active {
+    opacity: 0.01;
+    transform: scale(0.5) translate(-200%, 0);
+    transition: all .5s ease-out;
+}

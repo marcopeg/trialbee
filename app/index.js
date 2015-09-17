@@ -2,6 +2,7 @@
 const __DEBUG__ = true;
 
 require('bootstrap/dist/css/bootstrap.css');
+require('./index.css');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
