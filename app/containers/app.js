@@ -3,7 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { startQs, resetQs, nextQs } from 'services/qs-services';
-import { validateNextable } from 'services/tmp-services';
+import { saveAnswers } from 'services/history-services';
+import { validateAnswer } from 'services/validator-service';
 
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
@@ -15,30 +16,46 @@ import { QsAfter } from 'components/QsAfter';
 import { QsDuring } from 'components/QsDuring';
 
 function scrumbleState(state) {
-  return {...state.qs, ...state.tmp};
+  return {...state.qs, answers: state.answers, history: state.history};
 }
 
 @connect(scrumbleState)
 export class App extends React.Component {
 
     render() {
-        var { dispatch, activeQs, qs, isNextable } = this.props;
+        var { dispatch, activeQs, qs, answers, history } = this.props;
 
         var view;
         var stepIndex = activeQs + 1;
         var visible   = stepIndex % 2;
+        var isNextable = false;
+
+        try {
+          isNextable = answers[qs[activeQs].id].isValid;
+        } catch (e) {}
 
         if (activeQs === -1) {
-            view = <QsBefore onStart={$=> dispatch(startQs())} />;
+            view = (
+              <QsBefore
+                canStart={Object.keys(history).length === 0}
+                onStart={$=> dispatch(startQs())}
+               />
+            );
         } else if (activeQs < qs.length) {
             view = (
               <QsDuring {...qs[activeQs]}
                 isNextable={isNextable}
-                onValue={val => dispatch(validateNextable(val, qs[activeQs]))}
+                onValue={val => dispatch(validateAnswer(val, qs[activeQs]))}
                 onNext={$=> dispatch(nextQs())} />
             );
         } else {
-            view = <QsAfter onReset={$=> dispatch(resetQs())} />;
+            view = (
+              <QsAfter
+                onReset={$=> dispatch(resetQs())}
+                onSave={$=> dispatch(saveAnswers())}
+                answers={answers}
+                questions={qs}/>
+            );
         }
 
         return (

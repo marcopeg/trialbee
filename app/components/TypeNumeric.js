@@ -12,11 +12,11 @@ export class TypeNumeric extends React.Component {
     }
 
     render() {
-        var { title, onNext } = this.props;
+        var { title, onNext, onValue } = this.props;
         return (
             <div>
                 <h3>{title}</h3>
-                <Input type="number" placeholder="type numeric" />
+                <Input onChange={e => onValue(e.target.value)} type="number" placeholder="type numeric" />
             </div>
         );
     }
