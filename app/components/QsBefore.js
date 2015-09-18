@@ -5,18 +5,22 @@ import Input from 'react-bootstrap/lib/Input';
 export class QsBefore extends React.Component {
 
     static propTypes = {
-        onStart: React.PropTypes.func
+        onStart: React.PropTypes.func,
+        canStart: React.PropTypes.bool
     }
 
     static defaultProps = {
-        onStart: null
+        onStart: null,
+        canStart: true
     }
 
     render() {
+        var btnDisabled = this.props.canStart ? false : true;
+
         return (
             <div>
                 <h3>Welcome Mario!</h3>
-                <Button bsStyle="primary" onClick={this.props.onStart}>Start</Button>
+                <Button disabled={btnDisabled} bsStyle={"primary"} onClick={this.props.onStart}>Start</Button>
             </div>
         );
     }

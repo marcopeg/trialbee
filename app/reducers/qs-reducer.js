@@ -13,7 +13,7 @@ const fakeQuestions = [{
 },{
   id: '3',
   type: 'date',
-  title: 'Your illness?',
+  title: 'Date of confirmation?',
   validator: 'notEmpty'
 }];
 

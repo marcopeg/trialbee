@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Table from 'react-bootstrap/lib/Table';
+
 export class ShowAnswers extends React.Component {
 
     static propTypes = {
@@ -11,10 +13,36 @@ export class ShowAnswers extends React.Component {
     }
 
     render() {
+      var answers = this.props.answers;
+      var rows = this.props.questions.map(question => {
+        return (<tr>
+          <td>{question.title}</td>
+          <td>{answers[question.id].value}</td>
+        </tr>);
+      });
+
+        var table = (
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Question</th>
+                <th>Answer</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows}
+            </tbody>
+          </Table>
+        );
+        // React.createElement(mapTypes[type], {
+        //   title: title,
+        //   onValue: onValue
+        // });
+
+
         return (
             <div>
-                {JSON.stringify(this.props.answers)}
-                {JSON.stringify(this.props.questions)}
+                {table}
             </div>
         );
     }
