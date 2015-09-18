@@ -1,5 +1,5 @@
 
 import { qsReducer } from 'reducers/qs-reducer';
-import { answerReducer } from 'reducers/answer-reducer';
+import { tmpReducer } from 'reducers/tmp-reducer';
 
-export const reducers = { qs: qsReducer, answers: answerReducer };
+export const reducers = { qs: qsReducer, tmp: tmpReducer };

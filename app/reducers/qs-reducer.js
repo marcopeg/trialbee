@@ -1,17 +1,14 @@
 import { SET_ACTIVE_QS } from 'actions/qs-actions';
 
 const fakeQuestions = [{
-  id: '1',
   type: 'string',
   title: 'Your name?',
   validator: 'notEmpty'
 },{
-  id: '2',
   type: 'numeric',
   title: 'Your age?',
   validator: 'notEmpty'
 },{
-  id: '3',
   type: 'date',
   title: 'Your illness?',
   validator: 'notEmpty'
