@@ -17,10 +17,20 @@ export class QsBefore extends React.Component {
     render() {
         var btnDisabled = this.props.canStart ? false : true;
 
+        var cnt = <Button disabled={btnDisabled} bsStyle={"primary"} onClick={this.props.onStart}>Start</Button>;
+        if (btnDisabled) {
+            cnt = (
+                <div>
+                    <p>the form was already filled!</p>
+                    <Button bsStyle="success" onClick={this.props.onStart}>Start Over</Button>
+                </div>
+            );
+        }
+
         return (
-            <div>
-                <h3>Welcome Mario!</h3>
-                <Button disabled={btnDisabled} bsStyle={"primary"} onClick={this.props.onStart}>Start</Button>
+            <div className="text-center">
+                <h3 style={{marginBottom:40}}>Welcome Mario!</h3>
+                {cnt}
             </div>
         );
     }

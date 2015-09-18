@@ -64,7 +64,6 @@ export class App extends React.Component {
                     <Paper isVisible={visible} children={view} />
                     <Paper isVisible={!visible} children={view} />
                 </div>
-
             </div>
         );
     }

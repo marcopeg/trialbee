@@ -37,13 +37,13 @@ export class QsDuring extends React.Component {
 
         var button;
         if (isNextable) {
-          button = <Button bsStyle="primary" onClick={onNext}>Next</Button>;
+          button = <Button className="next-btn" bsStyle="primary" onClick={onNext}>Next</Button>;
         }
 
         return (
           <div>
             {input}
-            {button}
+            <div className="text-right">{button}</div>
           </div>
         );
     };
