@@ -1,4 +1,5 @@
 import { setActiveQs } from 'actions/qs-actions';
+import { setIsNextable } from 'actions/tmp-actions';
 
 export function startQs() {
   return (dispatch, getState) => {
@@ -15,6 +16,7 @@ export function nextQs() {
     var activeQs = state.activeQs;
     if (activeQs > -1 && activeQs < state.qs.length) {
       dispatch(setActiveQs(activeQs + 1));
+      dispatch(setIsNextable(false));
     }
   };
 }
