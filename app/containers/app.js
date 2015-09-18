@@ -15,25 +15,31 @@ import { QsDuring } from 'components/QsDuring';
 
 @connect(state => state.qs)
 export class App extends React.Component {
+    componentWillReceiveProps(nextProps) {
+        this.isLastCard = (nextProps.activeQs === -1);
+    }
+    componentWillMount() {
+        this.isLastCard = false;
+    }
+
     render() {
         var { dispatch, activeQs, qs } = this.props;
 
-        var view, stepIndex;
-        var totalSteps = qs.length + 2;
-        var visible = true;
+        var view;
+        var stepIndex = activeQs + 1;
+        var visible   = stepIndex % 2;
 
         if (activeQs === -1) {
-            stepIndex = 0;
             view = <QsBefore onStart={$=> dispatch(startQs())} />;
-        } else if (activeQs === qs.length) {
-            stepIndex = qs.length + 2;
-            view = <QsAfter onReset={$=> dispatch(resetQs())} />;
-        } else {
-            stepIndex = activeQs + 1;
+        } else if (activeQs < qs.length) {
             view = <QsDuring {...qs[activeQs]} onNext={$=> dispatch(nextQs())} />;
+        } else {
+            view = <QsAfter onReset={$=> dispatch(resetQs())} />;
         }
 
-        visible = stepIndex % 2;
+        if(this.isLastCard && (this.props.qs.length % 2 !== 0)){
+            visible = !visible;
+        }
 
         return (
             <Grid>
