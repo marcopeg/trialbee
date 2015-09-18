@@ -1,6 +1,6 @@
-import { setIsNextable } from 'actions/tmp-actions';
+import { setIsNextable } from 'actions/answer-actions';
 
-export function validateNextable(value, question) {
+export function setAnswer(value, question) {
   return (dispatch, getState) => {
     console.log('question', question);
     dispatch(setIsNextable(value.length > 0));

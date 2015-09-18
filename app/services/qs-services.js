@@ -1,5 +1,5 @@
 import { setActiveQs } from 'actions/qs-actions';
-import { setIsNextable } from 'actions/tmp-actions';
+import { setIsNextable } from 'actions/answer-actions';
 
 export function startQs() {
   return (dispatch, getState) => {

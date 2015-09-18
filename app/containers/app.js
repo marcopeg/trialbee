@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { startQs, resetQs, nextQs } from 'services/qs-services';
-import { validateNextable } from 'services/tmp-services';
+import { setAnswer } from 'services/answer-services';
 
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
@@ -15,7 +15,7 @@ import { QsAfter } from 'components/QsAfter';
 import { QsDuring } from 'components/QsDuring';
 
 function scrumbleState(state) {
-  return {...state.qs, ...state.tmp};
+  return {...state.qs, ...state.answers};
 }
 
 @connect(scrumbleState)
@@ -40,7 +40,7 @@ export class App extends React.Component {
             view = (
               <QsDuring {...qs[activeQs]}
                 isNextable={isNextable}
-                onValue={val => dispatch(validateNextable(val, qs[activeQs]))}
+                onValue={val => dispatch(setAnswer(val, qs[activeQs]))}
                 onNext={$=> dispatch(nextQs())} />
             );
         } else {
