@@ -15,7 +15,7 @@ export class Paper extends React.Component {
         var cnt;
         var props = {
             key: 'paper-child',
-            className: ['paper', 'shadow-z-3', this.props.className].join(' ')
+            className: ['paper', 'shadow-z-3', 'app-area', this.props.className].join(' ')
         };
 
         if (this.props.isVisible) {

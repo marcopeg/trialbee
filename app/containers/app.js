@@ -32,17 +32,13 @@ export class App extends React.Component {
         }
 
         return (
-            <Grid>
-                <Row>
-                    <PageHeader>FooApp</PageHeader>
-                </Row>
-
-                <div style={{position: 'relative'}}>
+            <div>
+                <div className="paper-wrapper" style={{position: 'relative'}}>
                     <Paper isVisible={visible} children={view} />
                     <Paper isVisible={!visible} children={view} />
                 </div>
 
-            </Grid>
+            </div>
         );
     }
 }
