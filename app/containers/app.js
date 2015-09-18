@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { startQs, resetQs, nextQs } from 'services/qs-services';
+import { saveAnswers } from 'services/history-services';
 import { validateAnswer } from 'services/validator-service';
 
 import Grid from 'react-bootstrap/lib/Grid';
@@ -49,7 +50,13 @@ export class App extends React.Component {
                 onNext={$=> dispatch(nextQs())} />
             );
         } else {
-            view = <QsAfter onReset={$=> dispatch(resetQs())} />;
+            view = (
+              <QsAfter
+                onReset={$=> dispatch(resetQs())}
+                onSave={$=> dispatch(saveAnswers())}
+                answers={answers}
+                questions={qs}/>
+            );
         }
 
         if(this.isLastCard && (this.props.qs.length % 2 !== 0)){
