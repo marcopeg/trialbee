@@ -12,11 +12,11 @@ export class TypeDate extends React.Component {
     }
 
     render() {
-        var { title, onNext } = this.props;
+        var { title, onNext, onValue } = this.props;
         return (
             <div>
                 <h3>{title}</h3>
-                <Input type="date" placeholder="type date" />
+                <Input onChange={e => onValue(e.target.value)} type="date" placeholder="type date" />
             </div>
         );
     }

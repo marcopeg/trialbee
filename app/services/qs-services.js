@@ -1,5 +1,5 @@
 import { setActiveQs } from 'actions/qs-actions';
-import { setIsNextable } from 'actions/tmp-actions';
+import { clearAnswers } from 'actions/answers-actions';
 
 export function startQs() {
   return (dispatch, getState) => {
@@ -16,7 +16,6 @@ export function nextQs() {
     var activeQs = state.activeQs;
     if (activeQs > -1 && activeQs < state.qs.length) {
       dispatch(setActiveQs(activeQs + 1));
-      dispatch(setIsNextable(false));
     }
   };
 }
@@ -25,6 +24,7 @@ export function resetQs() {
   return (dispatch, getState) => {
     var state = getState().qs;
     if (state.activeQs === state.qs.length) {
+      dispatch(clearAnswers());
       dispatch(setActiveQs(-1));
     }
   };
