@@ -1,4 +1,5 @@
 import { setActiveQs } from 'actions/qs-actions';
+import { clearAnswers } from 'actions/answers-actions';
 
 export function startQs() {
   return (dispatch, getState) => {
@@ -23,6 +24,7 @@ export function resetQs() {
   return (dispatch, getState) => {
     var state = getState().qs;
     if (state.activeQs === state.qs.length) {
+      dispatch(clearAnswers());
       dispatch(setActiveQs(-1));
     }
   };
