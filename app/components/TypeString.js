@@ -8,15 +8,16 @@ export class TypeString extends React.Component {
     // }
 
     static defaultProps = {
-        title: 'title'
+        title: 'title',
+        onValue: null
     }
 
     render() {
-        var { title, onNext } = this.props;
+        var { title, onNext, onValue } = this.props;
         return (
             <div>
                 <h3>{title}</h3>
-                <Input type="text" placeholder="type string" />
+                <Input onChange={e => onValue(e.target.value)} type="text" placeholder="type string" />
             </div>
         );
     }

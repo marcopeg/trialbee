@@ -6,36 +6,45 @@ import { TypeNumeric } from 'components/TypeNumeric';
 import { TypeDate } from 'components/TypeDate';
 
 const mapTypes = {
-    string: TypeString,
-    numeric: TypeNumeric,
-    date: TypeDate
+  string: TypeString,
+  numeric: TypeNumeric,
+  date: TypeDate
 };
 
 export class QsDuring extends React.Component {
 
     static propTypes = {
-        onNext: React.PropTypes.func
+      onNext: React.PropTypes.func,
+      onValue: React.PropTypes.func
     }
 
     static defaultProps = {
-        type: 'string',
-        title: 'title',
-        validator: 'notEmpty',
-        onNext: null
+      type: 'string',
+      title: 'title',
+      validator: 'notEmpty',
+      onNext: $=> {},
+      onValue: $=> {},
+      isNextable: false
     }
 
     render() {
-        var { type, title, onNext } = this.props;
+        var { type, title, onNext, isNextable, onValue } = this.props;
 
         var input = React.createElement(mapTypes[type], {
-            title: title
+          title: title,
+          onValue: onValue
         });
 
+        var button;
+        if (isNextable) {
+          button = <Button bsStyle="primary" onClick={onNext}>Next</Button>;
+        }
+
         return (
-            <div>
-                {input}
-                <Button bsStyle="primary" onClick={onNext}>Next</Button>
-            </div>
+          <div>
+            {input}
+            {button}
+          </div>
         );
-    }
+    };
 }

@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { startQs, resetQs, nextQs } from 'services/qs-services';
+import { validateNextable } from 'services/tmp-services';
 
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
@@ -13,11 +14,15 @@ import { QsBefore } from 'components/QsBefore';
 import { QsAfter } from 'components/QsAfter';
 import { QsDuring } from 'components/QsDuring';
 
-@connect(state => state.qs)
+function scrumbleState(state) {
+  return {...state.qs, ...state.tmp};
+}
+
+@connect(scrumbleState)
 export class App extends React.Component {
 
     render() {
-        var { dispatch, activeQs, qs } = this.props;
+        var { dispatch, activeQs, qs, isNextable } = this.props;
 
         var view;
         var stepIndex = activeQs + 1;
@@ -26,7 +31,12 @@ export class App extends React.Component {
         if (activeQs === -1) {
             view = <QsBefore onStart={$=> dispatch(startQs())} />;
         } else if (activeQs < qs.length) {
-            view = <QsDuring {...qs[activeQs]} onNext={$=> dispatch(nextQs())} />;
+            view = (
+              <QsDuring {...qs[activeQs]}
+                isNextable={isNextable}
+                onValue={val => dispatch(validateNextable(val, qs[activeQs]))}
+                onNext={$=> dispatch(nextQs())} />
+            );
         } else {
             view = <QsAfter onReset={$=> dispatch(resetQs())} />;
         }
