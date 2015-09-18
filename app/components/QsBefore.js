@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
+import Input from 'react-bootstrap/lib/Input';
 
 export class QsBefore extends React.Component {
 
